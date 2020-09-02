@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+import tkinter.scrolledtext as scrolledtext
 
 filename = None
 
@@ -72,12 +73,13 @@ def openFile():
 #setting up text editing window with Tkinter
 editor = Tk()
 editor.title("untitled.txt")
-editor.minsize(width = 750, height = 750)
-editor.maxsize(width = 750, height = 750)
+editor.minsize(width = 500, height = 380)
+editor.maxsize(width = 500, height = 380)
 
-#adding text editing feature to Tkinter window
-text = Text(editor, width = 750, height = 750, undo=True)
-text.pack()
+#adding text editing feature with scroll bar to Tkinter window
+text = scrolledtext.ScrolledText(editor, undo=True)
+text['font'] = ('consolas', '14')
+text.pack(expand=True, fill='both')
 
 #adding menu bar to Tkinter window
 menubar = Menu(editor)
