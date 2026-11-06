@@ -20,8 +20,9 @@ def saveFile():
     Saves all edits from previously saved .txt file. If not previously saved, saveAs is called in exception.
     '''
     global filename
-    #within filename, all text from 0th row and 0th column to the end is gotten
-    t = text.get(0.0, END)
+    #within filename, all text from 0th row and 0th column to the end is gotten,
+    #leaving out the newline that Tk always keeps after the last line
+    t = text.get(0.0, 'end-1c')
     #file is saved under provided filename and text is written
     try:
         f = open(filename, 'w')
@@ -30,7 +31,7 @@ def saveFile():
     except:
         #if the file isn't already created, this does a saveAs
         f = filedialog.asksaveasfile(confirmoverwrite=False, mode = 'w', defaultextension = '.txt')
-        t = text.get(0.0, END)
+        t = text.get(0.0, 'end-1c')
         try:
             filename = f.name
             display_name = filename[filename.rindex('/')+1:]
@@ -46,7 +47,7 @@ def saveAs():
     '''
     global filename
     f = filedialog.asksaveasfile(confirmoverwrite=False, mode = 'w', defaultextension = '.txt')
-    t = text.get(0.0, END)
+    t = text.get(0.0, 'end-1c')
     try:
         filename = f.name
         display_name = filename[filename.rindex('/')+1:]
